@@ -1,0 +1,19 @@
+ul{
+    list-style: none;
+    padding:unset;
+    margin:unset;
+}
+
+.entries-list-item{
+    height:35px;
+    max-width: 260px;
+    margin:5px 0px;
+    padding: 5px 10px;
+    background-color: white;
+    border-radius:5px;   
+    font-size: 18px;
+}
+
+.item-value{
+  font-weight: 500;
+}

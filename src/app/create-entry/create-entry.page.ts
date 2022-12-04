@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IEntry } from '../entry.interface';
-import { IMonth } from '../month-selector/month-selector.component'
+
 
 @Component({
   selector: 'app-create-entry',
@@ -8,15 +8,15 @@ import { IMonth } from '../month-selector/month-selector.component'
   styleUrls: ['./create-entry.page.css']
 })
 export class CreateEntryPage implements OnInit {
-  selectedMonth:any;
-  entries:IEntry[] = [{id:1 , month:{id:1, name:'January'}, category:{id:1, name:'Food'}, value:100, dateCreated:Date.now()}] 
+  entries:IEntry[] = [{id:1 , month:{id:1, name:'January'}, category:{id:1, name:'Food'}, value:100, dateCreated:Date.now()},{id:1 , month:{id:1, name:'January'}, category:{id:1, name:'Food'}, value:100, dateCreated:Date.now()}] 
   constructor() { }
 
   ngOnInit() {
+    //todo get categories from db
+  }
 
-  }
-  monthSelectedHandler(month:IMonth) {
-    this.selectedMonth = month;
-    console.log(this.selectedMonth);
-  }
+onSubmit(entry:IEntry) {
+  this.entries.push(entry);
+  console.log(entry);
+}
 }
