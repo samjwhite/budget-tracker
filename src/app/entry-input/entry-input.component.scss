@@ -1,0 +1,28 @@
+.primary-container {
+  margin: 100px auto;
+  padding: 25px;
+  background-color: rgb(143, 227, 255);
+  min-height: 100px;
+  width: auto;
+}
+
+.custom-dropdown {
+  list-style: none;
+  padding: unset;
+  margin-top: 5px;
+}
+
+.custom-dropdown-item {
+  height: 50px;
+  min-width: 200px;
+  background-color: white;
+  border: 1px solid rgb(143, 227, 255);
+  border-radius: 5px;
+  padding: 7px 10px;
+  font-size: 20px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: aliceblue;
+  }
+}
