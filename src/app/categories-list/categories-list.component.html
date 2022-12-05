@@ -1,0 +1,3 @@
+<ul>
+  <li class="entries-list-item d-flex justify-content-between" *ngFor="let category of categories">{{category.name}}: <span class="item-value">${{category.getValuesSum()}}</span></li>
+</ul>

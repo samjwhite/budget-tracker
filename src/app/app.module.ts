@@ -7,7 +7,8 @@ import { EntryInputComponent } from './entry-input/entry-input.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import { CreateEntryPage } from './create-entry/create-entry.page';
-import { EntriesListComponent } from './entries-list/entries-list.component';
+import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { SumPipe } from './pipes/sum.pipe';
 
 @NgModule({
   declarations: [				
@@ -15,7 +16,8 @@ import { EntriesListComponent } from './entries-list/entries-list.component';
       EntryInputComponent,
       MonthSelectorComponent,
       CreateEntryPage,
-      EntriesListComponent
+      CategoriesListComponent,
+      SumPipe
    ],
   imports: [
     BrowserModule,

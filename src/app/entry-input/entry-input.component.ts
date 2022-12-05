@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { CATEGORIES } from '../categories';
+import { Category } from '../category';
 import { ICategory } from '../category.interface';
 import { IMonth } from '../month-selector/month-selector.component'
 
@@ -8,9 +10,8 @@ import { IMonth } from '../month-selector/month-selector.component'
   styleUrls: ['./entry-input.component.scss']
 })
 export class EntryInputComponent implements OnInit {
-
-
-  categories: ICategory[] = [{id:1, name:'🥗 food'}, {id:2, name:'⚡utilities'}]
+ 
+  categories: Category[] = CATEGORIES;
   categoryInput:any;
   categoriesFound:any[] = [];
   selectedCategory:any;
@@ -48,8 +49,9 @@ export class EntryInputComponent implements OnInit {
       return;
     }
     let id = this.generateId();
-    let entry = {id:id, month:this.selectedMonth, category:this.selectedCategory, value:this.value,dateCreated: Date.now()};
-    this.submit.emit(entry)
+    let entry = {id:id, month:this.selectedMonth, value:this.value, dateCreated: Date.now()};
+    this.selectedCategory.entries.push(entry)
+    this.submit.emit(this.selectedCategory)
   }
 
   generateId():string{
