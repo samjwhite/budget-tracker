@@ -1,5 +1,5 @@
 import { ICategory } from "./category.interface";
-import { IEntry } from "./entry.interface";
+import { IEntry } from "../entry.interface";
 
 export class Category implements ICategory {
 id:number;

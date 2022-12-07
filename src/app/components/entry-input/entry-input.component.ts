@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CATEGORIES } from '../categories';
-import { Category } from '../category';
-import { ICategory } from '../category.interface';
-import { IMonth } from '../month-selector/month-selector.component'
+import { CATEGORIES } from 'src/app/models/category/categories';
+import { ICategory } from 'src/app/models/category/category.interface';
+import { Category } from '../../models/category/category';
+import { IMonth } from '../../models/month/month.interface';
 
 @Component({
   selector: 'app-entry-input',
@@ -45,13 +45,14 @@ export class EntryInputComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log("entry input submit clicked");
     if(!this.selectedMonth){
       return;
     }
     let id = this.generateId();
     let entry = {id:id, month:this.selectedMonth, value:this.value, dateCreated: Date.now()};
     this.selectedCategory.entries.push(entry)
-    this.submit.emit(this.selectedCategory)
+    //this.submit.emit(this.selectedCategory)
   }
 
   generateId():string{

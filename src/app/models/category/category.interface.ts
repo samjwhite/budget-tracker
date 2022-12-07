@@ -1,4 +1,5 @@
-import { IEntry } from "./entry.interface";
+import { IEntry } from "../entry.interface";
+
 
 export interface ICategory {
     id:number;

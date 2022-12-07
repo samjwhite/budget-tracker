@@ -3,11 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { EntryInputComponent } from './entry-input/entry-input.component';
+import { EntryInputComponent } from './components/entry-input/entry-input.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MonthSelectorComponent } from './month-selector/month-selector.component';
-import { CreateEntryPage } from './create-entry/create-entry.page';
-import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { MonthSelectorComponent } from './components/month-selector/month-selector.component';
+import { CreateEntryPage } from './pages/create-entry/create-entry.page';
+import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { SumPipe } from './pipes/sum.pipe';
 
 @NgModule({

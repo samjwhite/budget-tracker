@@ -1,5 +1,10 @@
 <app-month-selector (select)="monthSelectedHandler($event)"></app-month-selector>
-  <div class="row mt-4">
+  
+<ng-container *ngIf="!selectedMonth; else inputForm">
+  <p>Select month...⬆️</p>
+</ng-container>
+<ng-template #inputForm>
+<div *ngIf="selectedMonth" class="row mt-4">
     <div class="col-5">
       <div class="input-group">
         <div class="row">
@@ -30,3 +35,4 @@
       </div>
     </div>
 </div>
+</ng-template>

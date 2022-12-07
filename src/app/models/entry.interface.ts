@@ -1,4 +1,5 @@
-import { IMonth } from "./month-selector/month-selector.component";
+import { IMonth } from "./month/month.interface";
+
 
 export interface IEntry{
     id: any;

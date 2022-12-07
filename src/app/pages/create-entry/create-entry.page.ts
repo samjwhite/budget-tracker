@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CATEGORIES } from '../categories';
-import { Category } from '../category';
+import { CATEGORIES } from 'src/app/models/category/categories';
+import { Category } from '../../models/category/category';
 
 @Component({
   selector: 'app-create-entry',
@@ -19,7 +19,7 @@ export class CreateEntryPage implements OnInit {
   }
 
 onSubmit(category: Category) {
-  this.categories.find(i => i.id === category.id)?.entries?.push(category?.entries[0])
+ //this.categories.find(i => i.id === category.id)?.entries?.push(category?.entries[0])
   console.log("create entry onSubmit", category);
 }
 }
