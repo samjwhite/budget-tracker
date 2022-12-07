@@ -2,14 +2,36 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import "colors.scss";
 body{
-    background-color:aliceblue;
+    background-color:$indanthrone-blue;
+}
+
+.btn-primary{
+    background-color:$indanthrone-blue;
+    border:unset;
+    
+    &:hover{
+        background-color: $blue-slate;      
+    }
+    &:active{
+        background-color: $indanthrone-blue !important;      
+    }
+    &:focus{
+        border: 1px solid $sunburst-yellow;
+        background-color: $indanthrone-blue;
+    }
+    &:focus-visible{
+        border: 1px solid $sunburst-yellow;
+        background-color: $indanthrone-blue;
+        box-shadow: unset;
+    }
 }
 
 .primary-container {
     margin: 100px auto;
     padding: 25px;
-    background-color: rgb(155 187 198);
+    background-color: $cool-blue;
     min-height: 100px;
     width: auto;
   }
