@@ -1,9 +1,15 @@
 import { IEntry } from "../entry.interface";
 
+export enum CategoryType{
+    Income,
+    Expense,
+    Investment
+}
 
 export interface ICategory {
     id:number;
     name:string;
-    entries: IEntry[];
+    type: CategoryType;
+    entries?: IEntry[];
 }
 

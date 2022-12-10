@@ -5,5 +5,5 @@ export interface IEntry{
     id: any;
     month:IMonth;
     value:number;
-    dateCreated: number;
+    dateCreated: Date;
 }

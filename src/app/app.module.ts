@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { EntryInputComponent } from './components/entry-input/entry-input.component';
@@ -22,7 +23,8 @@ import { SumPipe } from './pipes/sum.pipe';
   imports: [
     BrowserModule,
     NgbModule, 
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

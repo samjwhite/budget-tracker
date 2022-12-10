@@ -1,4 +1,5 @@
-import { ICategory } from "../../category.interface";
+
+import { ICategory } from "../category/category.interface";
 import { IMonth } from "./month.interface";
 
 export class Month implements IMonth{

@@ -19,6 +19,7 @@ export class EntryInputComponent implements OnInit {
   selectedMonth:any;
 
   @Output() submit: EventEmitter<any> = new EventEmitter();
+  @Output() dateSelected: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -27,6 +28,7 @@ export class EntryInputComponent implements OnInit {
 
   monthSelectedHandler(month:IMonth) {
     this.selectedMonth = month;
+    this.dateSelected.emit(this.selectedMonth);
     console.log(this.selectedMonth);
   }
 
