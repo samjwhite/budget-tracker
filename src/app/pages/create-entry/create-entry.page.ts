@@ -1,13 +1,11 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  CATEGORIES
-} from 'src/app/models/category/categories';
-import {
-  Category
-} from '../../models/category/category';
+import { Component, OnInit } from '@angular/core';
+import { mapToStyles } from '@popperjs/core/lib/modifiers/computeStyles';
+import { from, groupBy, mergeMap, toArray } from 'rxjs';
+import {  CATEGORIES } from 'src/app/models/category/categories';
+import { Entry } from 'src/app/models/entry/entry';
+import { EntryService } from 'src/app/models/entry/entry.service';
+
+
 
 @Component({
   selector: 'app-create-entry',
@@ -15,35 +13,49 @@ import {
   styleUrls: ['./create-entry.page.css']
 })
 
+
+
 export class CreateEntryPage implements OnInit {
 
-  categories: Category[] = CATEGORIES;
-  listItems: any[] = [];
+  entries: Entry[] = [];
 
-  constructor() {}
+  constructor(private entryService: EntryService) {}
 
-  ngOnInit() {
-    //todo get categories from db
+  ngOnInit():void {
+    console.log('entries = ', this.getEntries());
   }
 
-  onDateSelected(date: any) {
-    let currentItems = [];
-    for (let category of this.categories) {
-      if (!category.entries) continue;
-      let currentCategory:Category = category;
-      currentCategory.entries = [];
-      for (let entry of category.entries) {
-        if (this.convertDateToLocaleString(entry.dateCreated)
-        .includes(this.convertDateToLocaleString(date))) {
-          currentCategory.entries.push(entry);
-        }
-      }
-      if(currentCategory.entries.length > 0) {
-        currentItems.push(currentCategory);
-      }
-    }
-    this.listItems = currentItems;
+
+  getEntries(): void{
+    this.entryService.getEntries()
+    .subscribe(entries => this.entries = entries);
   }
+
+  onDateSelected(month: any) {
+   
+    //find entries with this date
+    //group entries by category 
+    //sum all entries in each category
+console.log("entries", this.entries)
+console.log("month name: ", month.name)
+
+
+  //todo convert date from ISO to Date
+   let toDateEntries = this.entries.filter(i => i.dateCreated.toLocaleString('default', {month: 'long'}) === month.name)
+   console.log("todateEntries", toDateEntries)
+  let entriesByCategory;
+   if(toDateEntries){
+    const source = from(toDateEntries);
+    source.pipe(
+      groupBy(entry => entry.category.name),
+      mergeMap(group => group.pipe(toArray()))
+    ).subscribe((data)=> entriesByCategory = data);
+    console.log("entriesbycat", entriesByCategory);
+   }
+  }
+
+
+  
 
   convertDateToLocaleString(date: any) {
     const options: Intl.DateTimeFormatOptions = {
@@ -53,7 +65,7 @@ export class CreateEntryPage implements OnInit {
     return date.toLocaleString("en-US", options);
   }
 
-  onSubmit(category: Category) {
+  onSubmit() {
     //this.categories.find(i => i.id === category.id)?.entries?.push(category?.entries[0])
   }
 }

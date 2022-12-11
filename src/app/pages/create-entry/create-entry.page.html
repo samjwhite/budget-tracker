@@ -1,4 +1,4 @@
 <div class="primary-container">
-<app-entry-input (submit)="onSubmit($event)" (dateSelected)="onDateSelected($event)"></app-entry-input>
-<app-categories-list [categories]="listItems"></app-categories-list>
+<app-entry-input (dateSelected)="onDateSelected($event)"></app-entry-input> 
+<app-categories-list [entries]="entries"></app-categories-list>
 </div>

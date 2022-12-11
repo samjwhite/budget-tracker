@@ -1,8 +1,9 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CATEGORIES } from 'src/app/models/category/categories';
 import { ICategory } from 'src/app/models/category/category.interface';
+import { CategoryService } from 'src/app/models/category/category.service';
 import { Category } from '../../models/category/category';
-import { IMonth } from '../../models/month/month.interface';
 
 @Component({
   selector: 'app-entry-input',
@@ -11,7 +12,7 @@ import { IMonth } from '../../models/month/month.interface';
 })
 export class EntryInputComponent implements OnInit {
  
-  categories: Category[] = CATEGORIES;
+  categories: Category[]= [];
   categoryInput:any;
   categoriesFound:any[] = [];
   selectedCategory:any;
@@ -21,15 +22,20 @@ export class EntryInputComponent implements OnInit {
   @Output() submit: EventEmitter<any> = new EventEmitter();
   @Output() dateSelected: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.getCategories();
   }
 
-  monthSelectedHandler(month:IMonth) {
+  getCategories(): void {
+    this.categoryService.getCategories()
+      .subscribe(categories => this.categories = categories);
+  }
+
+  monthSelectedHandler(month:string) {
     this.selectedMonth = month;
     this.dateSelected.emit(this.selectedMonth);
-    console.log(this.selectedMonth);
   }
 
   onCategoryInput(){
@@ -38,6 +44,7 @@ export class EntryInputComponent implements OnInit {
 
   onCategoryInputFocus(){
     this.categoriesFound = this.categories;
+    console.log(this.categoriesFound)
   }
 
   selectCategory(category: ICategory){
@@ -52,7 +59,7 @@ export class EntryInputComponent implements OnInit {
       return;
     }
     let id = this.generateId();
-    let entry = {id:id, month:this.selectedMonth, value:this.value, dateCreated: Date.now()};
+    let entry = {id:id, value:this.value, dateCreated:new Date(Date.now())};
     this.selectedCategory.entries.push(entry)
     //this.submit.emit(this.selectedCategory)
   }
