@@ -4,5 +4,5 @@ export interface IEntry{
     id: any;
     value:number;
     dateCreated: Date;
-    category: ICategory;
+    categoryId: any;
 }

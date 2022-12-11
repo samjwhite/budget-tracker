@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { mapToStyles } from '@popperjs/core/lib/modifiers/computeStyles';
 import { from, groupBy, mergeMap, toArray } from 'rxjs';
 import {  CATEGORIES } from 'src/app/models/category/categories';
+import { Category } from 'src/app/models/category/category';
+import { CategoryService } from 'src/app/models/category/category.service';
 import { Entry } from 'src/app/models/entry/entry';
 import { EntryService } from 'src/app/models/entry/entry.service';
 
@@ -18,11 +20,14 @@ import { EntryService } from 'src/app/models/entry/entry.service';
 export class CreateEntryPage implements OnInit {
 
   entries: Entry[] = [];
+  categories: Category[] = [];
+  entriesGrouped: any;
 
-  constructor(private entryService: EntryService) {}
+  constructor(private entryService: EntryService, private categoryService: CategoryService) {}
 
   ngOnInit():void {
-    console.log('entries = ', this.getEntries());
+    this.getEntries();
+    this.getCategories();
   }
 
 
@@ -30,32 +35,33 @@ export class CreateEntryPage implements OnInit {
     this.entryService.getEntries()
     .subscribe(entries => this.entries = entries);
   }
-
-  onDateSelected(month: any) {
-   
-    //find entries with this date
-    //group entries by category 
-    //sum all entries in each category
-console.log("entries", this.entries)
-console.log("month name: ", month.name)
-
-
-  //todo convert date from ISO to Date
-   let toDateEntries = this.entries.filter(i => i.dateCreated.toLocaleString('default', {month: 'long'}) === month.name)
-   console.log("todateEntries", toDateEntries)
-  let entriesByCategory;
-   if(toDateEntries){
-    const source = from(toDateEntries);
-    source.pipe(
-      groupBy(entry => entry.category.name),
-      mergeMap(group => group.pipe(toArray()))
-    ).subscribe((data)=> entriesByCategory = data);
-    console.log("entriesbycat", entriesByCategory);
-   }
+  getCategories(): void{
+    this.categoryService.getCategories()
+    .subscribe(categories => this.categories = categories);
   }
 
+  onDateSelected(month: any) {
+    //find entries with this date
+   let toDateEntries:Entry[] = this.entries.filter(i => i.dateCreated.toLocaleString('default', {month: 'long'}) === month.name)
 
-  
+
+   let entriesByCategory = new Array;
+   if(toDateEntries){
+    //group entries by category 
+    for(let category of this.categories){
+      let sumValue = 0;
+     let categoryArray = toDateEntries.filter(i => i.categoryId == category.id);
+      //sum all entries in each category
+     for (let entry of categoryArray){
+        sumValue+=entry.value;    
+     }
+     console.log(categoryArray)
+    entriesByCategory.push({id:category.id, entries:categoryArray, sumValue:sumValue});
+    }
+   }
+   console.log("entriesbycat", entriesByCategory);
+   this.entriesGrouped = entriesByCategory;
+  }
 
   convertDateToLocaleString(date: any) {
     const options: Intl.DateTimeFormatOptions = {

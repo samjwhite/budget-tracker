@@ -18,12 +18,12 @@ export class InMemoryDataService implements InMemoryDbService {
     ]
 
     const entries:IEntry[] = [
-      new Entry(1,100, new Date(Date.now()),categories[0]),
-      new Entry(2,100, new Date(Date.now()),categories[1]),
-      new Entry(3,100, new Date(Date.now()),categories[2]),
-      new Entry(4,100, new Date(Date.now()),categories[2]),
-      new Entry(5,100, new Date(Date.now()),categories[1]),
-      new Entry(6,100, new Date(Date.now()),categories[0]),
+      new Entry(1,100, new Date(Date.now()),1),
+      new Entry(2,200, new Date(Date.now()),2),
+      new Entry(3,300, new Date(Date.now()),3),
+      new Entry(4,300, new Date(Date.now()),3),
+      new Entry(5,200, new Date(Date.now()),2),
+      new Entry(6,100, new Date(Date.now()),1),
     ];
 
     return {categories:categories,entries:entries};

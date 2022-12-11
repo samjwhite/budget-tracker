@@ -4,6 +4,8 @@ import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { EntryService } from 'src/app/models/entry/entry.service';
+import { CategoryService } from 'src/app/models/category/category.service';
+import { Category } from 'src/app/models/category/category';
 
 @Component({
   selector: 'app-categories-list',
@@ -11,31 +13,25 @@ import { EntryService } from 'src/app/models/entry/entry.service';
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-  @Input() entries:Entry[] = [];
+  @Input() items = new Array;
   @Input() date: Date = new Date();
-  entriesByCategory:Entry[] = [];
+  categories:Category[]=[];
 
-  constructor(private entryService: EntryService) { }
+  constructor( private categoryService:CategoryService) { }
 
   ngOnInit():void { 
-    this.getEntries();
     this.getCategories();
   }
 
-   getEntries() {
-    this.entryService.getEntries()
-    .subscribe(entries => this.entries = entries);
+  getCategoryName(id:any){
+    if(!this.categories)return;
+    if(!id) return;
+    return this.categories.find(i => i.id == id)?.name || "undefined";
   }
 
   getCategories(){
-//emit each entry
-const source = from(this.entries);
-//group by category
-source.pipe(
-  groupBy(entry => entry.category.name),
-  // return each item in group as array
-  mergeMap(group => group.pipe(toArray()))
-).subscribe((data)=> this.entriesByCategory = data);
+    this.categoryService.getCategories()
+    .subscribe(categories => this.categories = categories);
   }
 
   getSumByCategory(name: any){

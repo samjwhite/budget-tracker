@@ -1,17 +1,17 @@
-import { ICategory } from "../category/category.interface";
+import { Category } from "../category/category";
 import { IEntry } from "../entry/entry.interface";
 
 export class Entry implements IEntry {
 id:number;
 value:number;
 dateCreated:Date;
-category:ICategory;
+categoryId:any;
 
- constructor(id:number, value:number, dateCreated:Date, category:ICategory) {
+ constructor(id:number, value:number, dateCreated:Date, categoryId:any) {
     this.id = id;
     this.value = value;
     this.dateCreated = dateCreated;
-    this.category = category;
+    this.categoryId = categoryId;
  };
 
 //  getValuesSum(){
