@@ -61,7 +61,7 @@ export class EntryInputComponent implements OnInit {
     let id = this.generateId();
     let entry = {id:id, value:this.value, dateCreated:new Date(Date.now())};
     this.selectedCategory.entries.push(entry)
-    //this.submit.emit(this.selectedCategory)
+    ///this.submit.emit(this.selectedCategory)
   }
 
   generateId():string{
